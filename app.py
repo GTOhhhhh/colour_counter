@@ -52,7 +52,7 @@ def show_result(filename):
                 <title>Colour Counter</title>
                 <head>
                 </head>
-                <h1>The number of colours is: </h1>
+                <h1>The number of areas for each colour is: </h1>
                 <pre>''' + str(result) + '</pre>' + '''
                 <img src="/uploads/''' + filename + '">'
 
