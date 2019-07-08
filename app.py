@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for, flash, send_from_directory
 from flask_socketio import SocketIO
 from werkzeug.utils import secure_filename
 from services.count_areas import colour_counter
@@ -44,6 +44,11 @@ def upload_file():
                                     filename=filename))
     return render_template('index.html')
 
+@app.route('/uploads/<filename>')
+def uploaded_file(filename):
+    return send_from_directory(app.config['UPLOAD_FOLDER'],
+                               filename)
+
 @app.route('/result/<filename>', methods=['GET', 'POST'])
 def show_result(filename):
     matrix = png_to_ints(UPLOAD_FOLDER + '/' + filename)
@@ -59,4 +64,4 @@ def show_result(filename):
 
 if __name__ == '__main__':
     print('* Running Colour Counter Service on http://127.0.0.1:5000/')
-    socketio.run(app)
+    socketio.run(app, debug=True)
