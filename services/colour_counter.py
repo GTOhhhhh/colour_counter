@@ -3,7 +3,6 @@
 import numpy as np
 import argparse
 from collections import deque
-
 import sys
 
 np.set_printoptions(threshold=sys.maxsize)
@@ -23,7 +22,6 @@ def colour_counter(matrix, shape):
     visited = np.zeros(shape)
     for i, row in enumerate(matrix):
         for j, elem in enumerate(row):
-
             if visited[i, j]:
                 continue
             else:
@@ -63,6 +61,5 @@ if __name__ == "__main__":
                         help='specifies the image shape of the provided binary file')
     args = parser.parse_args()
     shape = [int(i) for i in args.shape.split(',')]
-    arr = np.fromfile(args.input_file, dtype='uint8', sep='')
-    matrix = arr.reshape(shape)
-    colour_counter(matrix, shape)
+    matrix = np.fromfile(args.input_file, dtype='uint8', sep='').reshape(shape)
+    print(colour_counter(matrix, shape))

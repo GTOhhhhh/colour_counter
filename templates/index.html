@@ -1,41 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-
+<!doctype html>
+<title>Colour Counter</title>
 <head>
-    <meta charset="UTF-8">
-    <title>Colour Counter</title>
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
-
-    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
-    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.css'>
-
-    <link rel="stylesheet" href="../static/style.css">
-
-
+    <script>
+        function myFunction() {
+            console.log('blah');
+        }
+    </script>
 </head>
-
-<body>
-
-
-<div class="wrap">
-    <h1>Colour Counter Service</h1>
-    <div class="custom-file">
-        <input class="custom-file-input" id="customFile" type="file"/>
-        <label class="custom-file-label" for="customFile">Add file</label>
-    </div>
-</div>
-<!--<div class = "wrap">-->
-<!--    <form action="/team_name_url/" method="post">-->
-<!--        <label for="team_name">Enter image dimensions: </label>-->
-<!--        <input id="team_name" type="text" name="name_field">-->
-<!--        <input type="submit" value="OK">-->
-<!--    </form>-->
-<!--</div>-->
-<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
-<script src="../js/script.js"></script>
-
-
-</body>
-
-</html>
+<h1>Upload a PNG to count the number of coloured areas in an image</h1>
+<form method=post enctype=multipart/form-data>
+    <input type=file name=file>
+    <input type=submit value=Upload onclick="myFunction()">
+</form>
