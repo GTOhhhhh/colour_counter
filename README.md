@@ -10,6 +10,12 @@ integers as explained below.
 # Installing
 Requires Linux/OSX and Python 3.5 or higher. 
 
+If you wish to use virtualenv (`pip3 install virtualenv`) then you may use the included script `setup.sh` to automatically activate a new virtualenv, install requirements and run the app. By doing:
+1. `chmod +x setup.sh`
+2. `./setup.sh`
+
+Otherwise:
+
 1. Install dependencies (`pip3 install -r requirements.txt`)
 2. Run (`python3 app.py`)
 3. Open [http://localhost:5000](http://localhost:5000)
