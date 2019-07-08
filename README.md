@@ -2,7 +2,7 @@
 A simple app which lets the user upload a PNG image file, converts it to a greyscale image with a 256 colorspace then
 counts the number of coloured areas.
 
-**Try uploading some test images from the `test_files` directory through the app and view the output**
+**Try uploading some test images from the `test_files` directory through the app and view the output.**
 
 Additionally, the `count_areas.py` service may be ran as a standalone script to process an array of unsigned 256 
 integers as explained below.
