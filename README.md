@@ -8,7 +8,7 @@ integers as explained below.
 # Installing
 Requires Linux/OSX and Python 3.5 or higher. 
 
-1. Install dependencies (`pip3 install -r requirements`)
+1. Install dependencies (`pip3 install -r requirements.txt`)
 2. Run (`python3 app.py`)
 3. Open [http://localhost:5000](http://localhost:5000)
 
