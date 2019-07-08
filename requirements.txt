@@ -3,4 +3,5 @@ numpy
 pytest
 opencv-python
 flask_socketio
+gevent
 
