@@ -28,4 +28,4 @@ To run `count_areas.py` as a command line script:
 
 or simply:
 1. `cd services` from the root directory
-2. `python3 count_areas.py <input-filename> --shape <height>,<width>` - e.g `python3 colour_counter.py sample.bin --shape 256,256`
+2. `python3 count_areas.py <input-filename> --shape <height>,<width>` - e.g `python3 count_areas.py sample.bin --shape 256,256`
