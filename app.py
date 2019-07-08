@@ -1,8 +1,8 @@
 import os
-from flask import Flask, render_template, request, redirect, url_for, flash, send_from_directory
+from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_socketio import SocketIO
 from werkzeug.utils import secure_filename
-from services.colour_counter import colour_counter
+from services.count_areas import colour_counter
 from services.img_bin_converter import png_to_ints
 
 UPLOAD_FOLDER = './uploads'
@@ -46,7 +46,6 @@ def upload_file():
 
 @app.route('/result/<filename>', methods=['GET', 'POST'])
 def show_result(filename):
-    print(UPLOAD_FOLDER + '/' + filename)
     matrix = png_to_ints(UPLOAD_FOLDER + '/' + filename)
     result = colour_counter(matrix, matrix.shape)
     return '''<!doctype html>

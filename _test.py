@@ -1,4 +1,4 @@
-from .services.colour_counter import four_neighbours, flood_fill, colour_counter
+from .services.count_areas import four_neighbours, flood_fill, colour_counter
 import numpy as np
 
 matrix = np.zeros((5, 3))

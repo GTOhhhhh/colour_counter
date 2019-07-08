@@ -3,22 +3,19 @@
 import numpy as np
 import argparse
 from collections import deque
-import sys
-
-np.set_printoptions(threshold=sys.maxsize)
 
 
 def colour_counter(matrix, shape):
     """Finds the number of continuous areas for each greyscale colour in an image
 
     Parameters:
-        matrix (numpy ndarray): The file location of the spreadsheet
+        matrix (numpy ndarray): A 2d array of 8 bit integers encoding a grey scale image
         shape (list): x, y dimensions of the array
 
     Returns:
         visited (numpy array): an array of length 256 representing the number of different sections for each colour
     """
-    output = np.zeros(256)  # 0 is black, 255 is white
+    output = np.zeros(256)
     visited = np.zeros(shape)
     for i, row in enumerate(matrix):
         for j, elem in enumerate(row):
@@ -62,4 +59,5 @@ if __name__ == "__main__":
     args = parser.parse_args()
     shape = [int(i) for i in args.shape.split(',')]
     matrix = np.fromfile(args.input_file, dtype='uint8', sep='').reshape(shape)
-    print(colour_counter(matrix, shape))
+    for i in colour_counter(matrix, shape):
+        print(int(i))
