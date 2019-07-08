@@ -2,3 +2,4 @@ gevent
 flask
 flask_socketio
 numpy
+pytest
