@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for, flash, send_from_directory
 from flask_socketio import SocketIO
 from werkzeug.utils import secure_filename
 from services.count_areas import colour_counter
@@ -43,6 +43,11 @@ def upload_file():
             return redirect(url_for('show_result',
                                     filename=filename))
     return render_template('index.html')
+
+@app.route('/uploads/<filename>')
+def uploaded_file(filename):
+    return send_from_directory(app.config['UPLOAD_FOLDER'],
+                               filename)
 
 @app.route('/result/<filename>', methods=['GET', 'POST'])
 def show_result(filename):
