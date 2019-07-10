@@ -59,4 +59,4 @@ def show_result(filename):
 
 if __name__ == '__main__':
     print('* Running Colour Counter Service on http://127.0.0.1:5000/')
-    socketio.run(app)
+    socketio.run(app, debug=True)

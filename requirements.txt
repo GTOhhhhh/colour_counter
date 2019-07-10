@@ -4,3 +4,4 @@ pytest
 opencv-python
 flask_socketio
 gevent
+bitarray
