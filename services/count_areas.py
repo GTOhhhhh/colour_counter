@@ -2,8 +2,9 @@
 
 import numpy as np
 import argparse
-from collections import deque
 from bitarray import bitarray
+
+np.set_printoptions(threshold=100000)
 
 
 def colour_counter(matrix, shape):
@@ -14,29 +15,30 @@ def colour_counter(matrix, shape):
         shape (list): x, y dimensions of the array
 
     Returns:
-        visited (numpy array): an array of length 256 representing the number of different sections for each colour
+        output (numpy array): an array of length 256 representing the number of different sections for each colour
     """
     output = np.zeros(256)
-    visited = bitarray((shape[0] * shape[1]))
+    # visited = bitarray((shape[0] * shape[1]))
     for i in range(shape[0]):
         for j in range(shape[1]):
-            if visited[i * shape[1] + j]:
+            if visited[i, j]:  # a perimeter point
                 continue
+                # if previous was visited and same colour
+            elif visited[i, j] and j - 1 > 0 and matrix[i, j - 1] == matrix[i, j]:
+                visited[i, j] = 1
             else:
-                visited[i * shape[1] + j] = 1
+                output[int(matrix[i, j])] += 1
+                visited[i, j] = 1
                 # can return indexes and mark them as visited
                 # or can mark as visited inside the function
-                output[int(matrix[i, j])] += 1
+                visited = perimeter_walk(matrix, shape, i, j)
     return output
 
 
-def perimeter_walk(matrix, shape, visited, i, j):
-    boundary = {(i, j)}
+def perimeter_walk(matrix, shape,  i, j):
     colour = matrix[i, j]
     start_i = i
     start_j = j
-    # we consider the first pixel was entered from the right
-    # so we backtrack left
     p_i = start_i
     p_j = start_j
     # we consider the first pixel was entered from the right
@@ -47,16 +49,11 @@ def perimeter_walk(matrix, shape, visited, i, j):
     # since we backtracked left, the first direction to look is up (clockwise rotation)
     direction = 1  # 0 is left, 1 is up, 2 is right, 3 is down
     while True:
-        print('boundary', boundary)
-        print(c_i, c_j)
         if c_i == start_i and c_j == start_j and direction == 2:
             break
         # colour matches and inside the matrix
-        if matrix[c_i, c_j] == colour and c_i > -1 and c_j > -1:
-            boundary.add((c_i, c_j))
-            p_i = c_i
-            p_j = c_j
-            print('backtrack!')
+        if -1 < c_i < shape[0] and -1 < c_j < shape[1] and matrix[c_i, c_j] == colour:
+            visited[c_i, c_j] = 1
             if direction == 0:  # if left backtrack right
                 c_j += 1
                 direction = 2
@@ -79,30 +76,7 @@ def perimeter_walk(matrix, shape, visited, i, j):
                 c_j += 1
             elif direction == 3:
                 c_i += 1
-    return boundary
-
-
-# def flood_fill(matrix, shape, visited, i, j):
-#     """Finds the area of continuous elements with a specific colour value"""
-#     stack = deque()
-#     stack.append((i, j))
-#     while stack:
-#         curr = stack.pop()
-#         if visited[curr[0] * shape[1] + curr[1]]:
-#             continue
-#         else:
-#             visited[curr[0] * shape[1] + curr[1]] = 1
-#             stack.extend(four_neighbours(matrix, shape, curr[0], curr[1]))
-#     return visited
-
-#
-# def four_neighbours(matrix, shape, i, j):
-#     """Returns four adjacent elements with the same colour as the target element"""
-#     indexes = [[i - 1, j], [i + 1, j], [i, j + 1], [i, j - 1]]  # north, south, east, west
-#     indexes = [idx for idx in indexes if idx[0] > -1 and idx[1] > -1]  # remove negative indexes
-#     indexes = [idx for idx in indexes if idx[0] < shape[0] and idx[1] < shape[1]]  # remove out of bounds indexes
-#     neighbours = [idx for idx in indexes if matrix[idx[0], idx[1]] == matrix[i, j]]  # remove different colours
-#     return neighbours
+    return visiteda
 
 
 if __name__ == "__main__":
@@ -113,5 +87,15 @@ if __name__ == "__main__":
     args = parser.parse_args()
     shape = [int(i) for i in args.shape.split(',')]
     matrix = np.fromfile(args.input_file, dtype='uint8', sep='').reshape(shape)
+    visited = np.zeros((shape[0], shape[1]))
     for i in colour_counter(matrix, shape):
         print(int(i))
+    # matrix = np.zeros((5, 3), dtype='uint8')
+    # matrix[0, 0] = 255
+    # matrix[1, 0] = 255
+    # matrix[0, 1] = 255
+    # matrix[-1, -1] = 255
+    # matrix[-1, -2] = 255
+    # matrix[2, 2] = 100
+    # shape = [5, 3]
+
