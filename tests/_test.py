@@ -12,7 +12,10 @@ def test_union_find():
     ds.union(8, 9)
     assert all(ds.elems == [0, 0, 2, 2, 4, 4, 6, 6, 8, 8])
     ds.union(6, 9)
-    assert all(ds.elems == [0, 0, 2, 2, 4, 4, 6, 6, 6, 6])
+    assert all(ds.elems == [0, 0, 2, 2, 4, 4, 6, 6, 6, 8]) # 9 points to 8, 8 points to 6
+    assert ds.find(9) == 6
+    assert all(ds.elems == [0, 0, 2, 2, 4, 4, 6, 6, 6, 6]) # 9 points to 8, 8 points to 6
+
     ds.union(7, 5)
     ds.union(0, 2)
     ds.union(3, 4)

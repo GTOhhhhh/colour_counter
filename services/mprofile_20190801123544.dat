@@ -1,0 +1,2 @@
+CMDLINE /Users/karlspiegel/colour_counter/venv/bin/python count_areas_simple.py cat.bin --shape 4000,4000
+MEM 0.320312 1564626944.2855
