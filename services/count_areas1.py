@@ -2,9 +2,8 @@
 
 import numpy as np
 import argparse
-# from disjoint_set import DisjointSet
+from disjoint_set import DisjointSet
 from memory_profiler import profile
-from .my_disjoint_set import DisjointSet
 
 
 class ColourCounter():
@@ -13,8 +12,7 @@ class ColourCounter():
         self.shape = shape
         # self.copy = np.zeros(shape[0] * shape[1], dtype='uint8')
         self.output = np.zeros(256, dtype='uint8')
-        self.ds = DisjointSet(shape[0]*shape[1])
-
+        self.ds = DisjointSet()
 
     def count_areas(self):
         """Finds the number of continuous areas for each greyscale colour in an image
@@ -30,37 +28,37 @@ class ColourCounter():
         # ds to find returns the set id/label by following the pointers to the root label'
         # if you find on a new element it becomes a new root
         # ds union merges to sets to the same label
-        # ds = DisjointSet()
         # width * row + col
-        for i, elem in enumerate(self.matrix):
-            west = i - 1
-            west_elem = None if west < 0 else self.matrix[west]
-            north = i - shape[0]
-            north_elem = None if north < 0 else self.matrix[north]
-            if west_elem != elem and north_elem != elem:
-                # largest_label = largest_label + 1
-                # self.copy[i] = largest_label
-                self.ds.find(i)
-                self.output[elem] += 1
-            elif west_elem == elem and north_elem != elem:
-                # self.copy[i] = self._find(west)
-                self.ds.union(i, west)
-            elif west_elem != elem and north_elem == elem:
-                self.ds.union(i, north)
-                # self.copy[i] = self._find(north)
+        for i in range(shape[0]):
+            for j in range(shape[1]):
+                idx = self.flatten_idx(i, j)
+                elem = matrix[idx]
+                west = self.flatten_idx(i, j - 1)
+                west_elem = None if west < 0 else self.matrix[west]
+                north = self.flatten_idx(i - 1, j)
+                north_elem = None if north < 0 else self.matrix[north]
 
-            else:  # north and west are both neighbours
-                # self._union(west, north)
-                # self.copy[elem] = self._find(west_elem)
-                self.ds.union(i, west)
+                if west_elem != elem and north_elem != elem:
+                    self.ds.find(i)
+                    # self.output[elem] += 1
+                elif west_elem == elem and north_elem != elem:
+                    self.ds.union(i, west)
+                elif west_elem != elem and north_elem == elem:
+                    self.ds.union(i, north)
+                else:  # north and west are both neighbours
+                    self.ds.union(north, west)
+                    self.ds.union(i, west)
 
         # print(ds)
         # # print('copy', self.copy)
-        # for i in ds.itersets():
-        #     colour = self.matrix[i.pop()]
-        #     self.output[int(colour)] += 1
+        for i in self.ds.itersets():
+            colour = self.matrix[i.pop()]
+            self.output[int(colour)] += 1
 
         return self.output
+
+    def flatten_idx(self, x, y):
+        return x * self.shape[1] + y
 
     # def _union(self, x, y):
     #     self.copy[self._find(x)] = self._find(y)
@@ -82,8 +80,8 @@ if __name__ == "__main__":
     parser.add_argument('--shape', required=True,
                     help='specifies the image shape of the provided binary file')
     args = parser.parse_args()
-    # shape = [int(i) for i in args.shape.split(',')]
-    # matrix = np.fromfile(args.input_file, dtype='uint8', sep='')
+    shape = [int(i) for i in args.shape.split(',')]
+    matrix = np.fromfile(args.input_file, dtype='uint8', sep='')
     matrix = np.zeros(3 * 5, dtype='uint8')
     matrix[0] = 255
     matrix[3 * 1 + 0] = 255
@@ -92,6 +90,6 @@ if __name__ == "__main__":
     matrix[-2] = 255
     matrix[2 * 3 + 2] = 100
     shape = (3, 5)
-    print(matrix.reshape((5, 3)))
+    # print(matrix.reshape((5, 3)))
     colour_counter = ColourCounter(matrix, shape)
     print(colour_counter.count_areas())

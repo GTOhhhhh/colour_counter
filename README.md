@@ -29,3 +29,8 @@ To run `count_areas.py` as a command line script:
 or simply:
 1. `cd services` from the root directory
 2. `python3 count_areas.py <input-filename> --shape <height>,<width>` - e.g `python3 count_areas.py sample.bin --shape 256,256`
+
+# Reference material for algorithm design
+- https://www.sciencedirect.com/science/article/pii/S0031320317301693
+- https://blogs.mathworks.com/steve/2007/03/06/connected-component-labeling-part-1/?s_tid=blogs_rc_2
+- https://pdfs.semanticscholar.org/8bfd/42a8eb013667bb8a0082c215d6f2db62776a.pdf
