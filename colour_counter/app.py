@@ -2,8 +2,8 @@ import os
 from flask import Flask, render_template, request, redirect, url_for, flash, send_from_directory
 from flask_socketio import SocketIO
 from werkzeug.utils import secure_filename
-from services.count_areas import count_areas
-from utils.img_bin_converter import png_to_ints
+from colour_counter.services.count_areas import count_areas
+from colour_counter.services.utils.img_bin_converter import png_to_ints
 
 UPLOAD_FOLDER = './uploads'
 if not os.path.isdir('./uploads'):

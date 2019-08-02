@@ -1,5 +1,4 @@
-import numpy as np
-from utils.union_find import UnionFind
+from colour_counter.services.utils import UnionFind
 
 
 def test_union_find():

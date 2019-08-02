@@ -1,8 +1,8 @@
-from distutils.core import setup
+from setuptools import setup, find_packages
 
 setup(name='colour_counter',
       version='1.0',
-      py_modules=['app', 'services.count_areas', 'utils.disjoint_set', 'utils.img_bin_converter', 'utils.union_find'],
+      packages=find_packages(),
       install_requires=['flask',
                         'numpy',
                         'pytest',
