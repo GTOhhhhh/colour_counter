@@ -17,8 +17,8 @@ class UnionFind:
             self.elems[i] = i
             self.size[i] = 1
 
-
     def find(self, x):
+        x = np.uint32(x)
         root = x
         while root != self.elems[root]:  # until root is itself
             root = self.elems[root]  # root becomes the next root

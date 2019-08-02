@@ -2,7 +2,7 @@ import os
 from flask import Flask, render_template, request, redirect, url_for, flash, send_from_directory
 from flask_socketio import SocketIO
 from werkzeug.utils import secure_filename
-from services.count_areas import ColourCounter
+from services.count_areas import count_areas
 from utils.img_bin_converter import png_to_ints
 
 UPLOAD_FOLDER = './uploads'
@@ -51,8 +51,8 @@ def uploaded_file(filename):
 
 @app.route('/result/<filename>', methods=['GET', 'POST'])
 def show_result(filename):
-    matrix = png_to_ints(UPLOAD_FOLDER + '/' + filename)
-    result = ColourCounter(matrix, matrix.shape).count_areas()
+    matrix, shape = png_to_ints(UPLOAD_FOLDER + '/' + filename)
+    result = count_areas(matrix, shape)
     return '''<!doctype html>
                 <title>Colour Counter</title>
                 <head>

@@ -1,4 +1,3 @@
-# from services.count_areas_simple_clone import ColourCounter
 import numpy as np
 from utils.union_find import UnionFind
 
@@ -16,11 +15,11 @@ def test_union_find():
     assert ds.find(9) == 6
     assert all(ds.elems == [0, 0, 2, 2, 4, 4, 6, 6, 6, 6]) # 9 points to 8, 8 points to 6
 
-    ds.union(7, 5)
-    ds.union(0, 2)
-    ds.union(3, 4)
-    ds.union(6, 1)
-    ds.union(8, 9)
+    # ds.union(7, 5)
+    # ds.union(0, 2)
+    # ds.union(3, 4)
+    # ds.union(6, 1)
+    # ds.union(8, 9)
 
 # def test_colour_counter():
 #     """
