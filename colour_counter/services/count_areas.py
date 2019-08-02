@@ -2,8 +2,13 @@
 
 import numpy as np
 import argparse
-from utils.union_find import UnionFind
 from numba import jit, njit, jitclass
+
+if __name__ == "__main__":
+    from utils.union_find import UnionFind
+else:
+    from colour_counter.services.utils.union_find import UnionFind
+
 
 # @njit
 def count_areas(matrix, shape):
