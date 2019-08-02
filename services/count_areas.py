@@ -47,4 +47,5 @@ if __name__ == "__main__":
     args = parser.parse_args()
     shape = [int(i) for i in args.shape.split(',')]
     matrix = np.fromfile(args.input_file, dtype='uint8', sep='')
-    print(count_areas(matrix, shape))
+    for i in count_areas(matrix, shape):
+        print(i)
