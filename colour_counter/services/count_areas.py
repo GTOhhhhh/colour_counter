@@ -2,7 +2,7 @@
 
 import numpy as np
 import argparse
-from colour_counter.services.utils.union_find import UnionFind
+from utils.union_find import UnionFind
 from numba import jit, njit, jitclass
 
 # @njit
