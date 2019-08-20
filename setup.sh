@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 virtualenv colour_counter
 source colour_counter/bin/activate
-pip3 install .
+python3 ./setup.py
 python3 ./colour_counter/app.py

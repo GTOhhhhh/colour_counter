@@ -2,11 +2,11 @@
 
 import numpy as np
 import argparse
+import os, sys
 
-if __name__ == "__main__":
-    from utils.union_find import UnionFind
-else:
-    from colour_counter.services.utils.union_find import UnionFind
+# appends the full path of the executing script to sys.path in a multi-platform safe way
+sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
+from utils.union_find import UnionFind # import works standalone or from parent directory
 
 
 def count_areas(matrix, shape):
