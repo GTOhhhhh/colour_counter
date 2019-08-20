@@ -1,4 +1,4 @@
-from numba import njit, jitclass, uint32
+from numba import jitclass, uint32
 import numpy as np
 
 spec = [
