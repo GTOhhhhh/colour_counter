@@ -16,7 +16,7 @@ If you wish to use virtualenv (`pip3 install virtualenv`) then you may use the i
 
 Otherwise:
 
-1. Install dependencies (`pip3 install .`)
+1. Install dependencies (`python3 setup.py`)
 2. Run (`python3 app.py`)
 3. Open [http://localhost:5000](http://localhost:5000)
 
