@@ -13,6 +13,7 @@ Requires Linux/OSX and Python 3.5 or higher.
 If you wish to use virtualenv (`pip3 install virtualenv`) then you may use the included script `setup.sh` to automatically activate a new virtualenv, install requirements and run the app. By doing:
 1. `chmod +x setup.sh`
 2. `./setup.sh`
+3. run the app with `python3 app.py` or `python app.py`
 
 Otherwise:
 
